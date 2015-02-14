@@ -53,5 +53,6 @@ int DigitalInputPin::IsShifted()
 	{
 		retValue = currentState;
 	}
+	preState = currentState;
 	return retValue;
 }
