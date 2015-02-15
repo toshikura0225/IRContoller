@@ -2,6 +2,9 @@
 
 int ir_out = 2;
 int led = 9;
+
+DigitalInputPin testPin(7);
+
  
 // テレビリモコン
 unsigned int powerON[] = {899,446,57,54,58,54,58,166,58,54,57,54,58,54,58,54,57,166,58,54,58,54,58,54,58,54,57,54,57,166,58,166,57,165,58,54,57,54,57,54,58,54,57,54,58,166,58,54,58,54,57,166,58,166,58,166,58,166,57,166,57,54,58,166,57,166,58,4320,898,223,57,4829,29};
@@ -24,6 +27,7 @@ void setup() {
   pinMode(ir_out, OUTPUT);
   pinMode(led, OUTPUT);
   
+  Serial.begin(9600);
 }
  
 // dataからリモコン信号を送信
@@ -43,35 +47,35 @@ void sendSignal(unsigned int data[], int dataSize) {
  
 void loop() {
   
-  if(pinPowerON.IsShifted() == HIGH)
+  if(pinPowerON.IsShifted() == LOW)
   {
     digitalWrite(led, HIGH);
     sendSignal(powerON, sizeof(powerON) / sizeof(powerON[0]));
     digitalWrite(led, LOW);
   }
-  else if(pinVolumeUP.IsShifted() == HIGH)
+  else if(pinVolumeUP.IsShifted() == LOW)
   {
     digitalWrite(led, HIGH);
     sendSignal(volumeUP, sizeof(volumeUP) / sizeof(volumeUP[0]));
     digitalWrite(led, LOW);
   }
-  else if(pinVolumeDOWN.IsShifted() == HIGH)
+  else if(pinVolumeDOWN.IsShifted() == LOW)
   {
     digitalWrite(led, HIGH);
     sendSignal(volumeDOWN, sizeof(volumeDOWN) / sizeof(volumeDOWN[0]));
     digitalWrite(led, LOW);
   }
-  else if(pinChannelUP.IsShifted() == HIGH)
+  else if(pinChannelUP.IsShifted() == LOW)
   {
     digitalWrite(led, HIGH);
     sendSignal(channelUP, sizeof(channelUP) / sizeof(channelUP[0]));
     digitalWrite(led, LOW);
   }  
-  else if(pinChannelDOWN.IsShifted() == HIGH)
+  else if(pinChannelDOWN.IsShifted() == LOW)
   {
     digitalWrite(led, HIGH);
     sendSignal(channelDOWN, sizeof(channelDOWN) / sizeof(channelDOWN[0]));
     digitalWrite(led, LOW);
   }
-
+  
 }
