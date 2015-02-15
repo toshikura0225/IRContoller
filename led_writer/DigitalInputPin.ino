@@ -42,10 +42,6 @@ int DigitalInputPin::GetState()
 	  keepingCount = 0;
   }
   
-  Serial.println(keepingCount);
-    
-
-  
   preState = currentState;
   
   return keepingState;
