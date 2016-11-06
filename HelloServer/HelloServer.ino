@@ -8,7 +8,7 @@ const char* password = "261DE409";
 
 ESP8266WebServer server(80);
 
-const int led = 13;
+const int led = 14;   // 13番ピンが壊れた
 
 
 
