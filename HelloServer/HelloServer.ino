@@ -3,8 +3,8 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
 
-const char* ssid = "........";
-const char* password = "........";
+const char* ssid = "L04D_57EB8F81";
+const char* password = "261DE409";
 
 ESP8266WebServer server(80);
 
@@ -62,6 +62,44 @@ void setup(void){
   });
 
   server.onNotFound(handleNotFound);
+
+  server.on("/aircon", []() {
+
+    if(server.args() > 0)
+    {
+      if(server.argName(0) == "ope")
+      {
+        if(server.arg(0) == "run")
+        {
+          Serial.println("run");
+          server.send(200, "text/plain", "Required 'run'");
+        }
+        else if(server.arg(0) == "power")
+        {
+          Serial.println("power");
+          server.send(200, "text/plain", "Required 'power'");
+        }
+        else if(server.arg(0) == "stop")
+        {
+          Serial.println("stop");
+          server.send(200, "text/plain", "Required 'stop'");
+        }
+        else
+        {
+          server.send(200, "text/plain", "Invalid parameter value.");
+        }
+      }
+      else
+      {
+        server.send(200, "text/plain", "Invalid parameter name.");
+      }
+    }
+    else
+    {
+      server.send(200, "text/plain", "Missing parameter.");
+    }
+    //server.argName(i) + ": " + server.arg(i)
+  });
 
   server.begin();
   Serial.println("HTTP server started");
